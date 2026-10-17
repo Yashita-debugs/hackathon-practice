@@ -1,3 +1,4 @@
+import json
 tasks=[]
 def add_task():
     description =input("enter the task: ")
@@ -6,6 +7,7 @@ def add_task():
 
     task={"description":description,"priority":priority,"group":group}
     tasks.append(task) 
+    save_tasks()
 
 def view_tasks():
     if len(tasks)==0:
@@ -32,7 +34,18 @@ def remove_tasks():
             print("Invalid index entered")
         else:
             removed=tasks.pop(n-1) 
+            save_tasks()
             print("Removed task: ",removed["description"])
+def save_tasks():
+    with open("tasks.json","w") as f:
+        json.dump(tasks,f)
+def load_tasks():
+        try:
+            with open("tasks.json","r") as f:
+                loaded=json.load(f)
+                tasks.extend(loaded)
+        except FileNotFoundError:
+            pass
 def main():
     while True:
         print("Main Menu")
@@ -53,5 +66,7 @@ def main():
         else:
             print("invalid choice entered by you ")
         
+load_tasks()
 main()
+
 

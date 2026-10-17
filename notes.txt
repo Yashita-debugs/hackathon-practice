@@ -1,0 +1,4 @@
+I am Yashita
+I am currently learning python file operations
+I am currently on day 2 
+doen
